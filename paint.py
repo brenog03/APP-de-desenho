@@ -8,53 +8,56 @@ def iniciarforma(event):
     xi = event.x
     yi = event.y
 
-def desenhar(xi, yi , xf , yf , Forma, temp):
 
-    #Verifica se e para desnhar ou se e temporario
+def desenhar(xi, yi, xf, yf, Forma, temp):
+    # Verifica se e para desnhar ou se e temporario
 
-    if temp:
-        tag = "temp"
-    else:
-        tag = None
-    
     if Forma == "linha":
         CanvaGrid.create_line(
-            xi, yi , xf , yf,
-            fill = CoresLinha.get(),
-            tags = tag,
-            width = 3
-        )
-    
-    elif Forma == "retangulo":
-        CanvaGrid.create_rectangle(
-            xi , yi , xf, yf,
-            fill = CoresPreenchimento.get(),
-            outline = CoresLinha.get(),
-            tags = tag,
-            width = 3
-        )
-    
-    elif Forma == "circulo":
-        CanvaGrid.create_oval(
-            xi, yi , xf, yf,
-            fill =  CoresPreenchimento.get(),
-            outline = CoresLinha.get(),
-            tags = tag,
-            width = 3
+            xi, yi, xf, yf,
+            fill=CoresLinha.get(),
+            tags=str(temp),
+            width=4
         )
 
+    elif Forma == "retangulo":
+        CanvaGrid.create_rectangle(
+            xi, yi, xf, yf,
+            fill=CoresPreenchimento.get(),
+            outline=CoresLinha.get(),
+            tags=str(temp),
+            width=4
+        )
+
+    elif Forma == "oval":
+        CanvaGrid.create_oval(
+            xi, yi, xf, yf,
+            fill=CoresPreenchimento.get(),
+            outline=CoresLinha.get(),
+            tags=str(temp),
+            width=4
+        )
+    elif Forma == "circulo":
+        CanvaGrid.create_oval(
+            xi-((xf-xi)**2+(yf-yi)**2)**(1/2), yi-((xf-xi)**2+(yf-yi)**2)**(1/2), xi+((xf-xi)**2+(yf-yi)**2)**(1/2), yi+((xf-xi)**2+(yf-yi)**2)**(1/2),
+            fill=CoresPreenchimento.get(),
+            outline=CoresLinha.get(),
+            tags=str(temp),
+            width=4
+        )
 
 def atualizarforma(event):
     xf = event.x
     yf = event.y
-    CanvaGrid.delete("temp")
+    CanvaGrid.delete("True")
     desenhar(xi, yi, xf, yf, forma.get(), True)
-    
+
+
 def gravarforma(event):
     xf = event.x
     yf = event.y
-    CanvaGrid.delete("temp")
-    desenhar(xi, yi , xf , yf , forma.get(), False)
+    CanvaGrid.delete("True")
+    desenhar(xi, yi, xf, yf, forma.get(), False)
 
 
 # ----------- Main ----------------
@@ -99,7 +102,7 @@ DesenharRetangulos = Radiobutton(
 )
 DesenharRetangulos.grid(row=0, column=1, padx=5, pady=5)
 
-DesenharOvais = Radiobutton(
+DesenharCirculos = Radiobutton(
     FrameGrid,
     text="O",
     width=5,
@@ -108,7 +111,18 @@ DesenharOvais = Radiobutton(
     value="circulo",
     bg="lightgrey",
 )
-DesenharOvais.grid(row=0, column=2, padx=5, pady=5)
+DesenharCirculos.grid(row=0, column=2, padx=5, pady=5)
+
+DesenharOvais = Radiobutton(
+    FrameGrid,
+    text="⬭",
+    width=5,
+    indicatoron=False,
+    variable=forma,
+    value="oval",
+    bg="lightgrey",
+)
+DesenharOvais.grid(row=0, column=3, padx=5, pady=5)
 
 ApagarTudo = Button(
     FrameGrid,
@@ -117,8 +131,7 @@ ApagarTudo = Button(
     bg="lightgrey",
     command=lambda: CanvaGrid.delete("all"),
 )
-ApagarTudo.grid(row=0, column=3, padx=5, pady=5)
-ApagarTudo.grid(row=0, column=3, padx=5, pady=5)
+ApagarTudo.grid(row=0, column=4, padx=5, pady=5)
 
 # --------------------- Caixas de Selecao --------------------------
 
