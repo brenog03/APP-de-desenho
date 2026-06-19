@@ -136,24 +136,24 @@ ApagarTudo.grid(row=0, column=4, padx=5, pady=5)
 # --------------------- Caixas de Selecao --------------------------
 
 TXTLinha = Label(FrameGrid, text="Cor da Linha: ")
-TXTLinha.grid(row=0, column=4, padx=1, pady=5)
+TXTLinha.grid(row=0, column=5, padx=1, pady=5)
 CoresLinha = Combobox(
     FrameGrid,
     values=["blue", "red", "green", "yellow", "purple", "pink", "black"],
     state="readonly",
     width=10,
 )
-CoresLinha.grid(row=0, column=5, padx=5, pady=5)
+CoresLinha.grid(row=0, column=6, padx=5, pady=5)
 
 TXTPreenchimento = Label(FrameGrid, text="Cor do Preenchimento: ")
-TXTPreenchimento.grid(row=0, column=6, padx=1, pady=5)
+TXTPreenchimento.grid(row=0, column=7, padx=1, pady=5)
 CoresPreenchimento = Combobox(
     FrameGrid,
     values=["blue", "red", "green", "yellow", "purple", "pink", "black"],
     state="readonly",
     width=10,
 )
-CoresPreenchimento.grid(row=0, column=7, padx=5, pady=5)
+CoresPreenchimento.grid(row=0, column=8, padx=5, pady=5)
 
 # ----------------- Definindo Opcoes Iniciais -------------------
 
